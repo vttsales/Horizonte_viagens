@@ -1,0 +1,299 @@
+/* combos.css
+   estilos dos cards de combo — principal diferencial do site */
+
+/* secao de combos com fundo escuro */
+.secao-combos {
+  background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+  padding: 70px 0;
+}
+
+.secao-combos .secao-titulo {
+  color: var(--branco);
+}
+.secao-combos .secao-subtitulo {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* badge "nosso diferencial" acima do titulo */
+.badge-diferencial {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--laranja);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* card principal */
+.card-combo {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  background: var(--branco);
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-combo:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(10, 22, 40, 0.2);
+}
+
+/* parte de cima com gradiente e nome do destino */
+.combo-header {
+  padding: 24px 20px 20px;
+  position: relative;
+  text-align: center;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.combo-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--branco);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
+}
+
+/* badge de desconto no canto direito */
+.combo-desconto-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--laranja);
+  color: var(--azul-escuro);
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 30px;
+}
+
+.combo-emoji {
+  font-size: 3rem;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.combo-destino-nome {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--branco);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.combo-pais {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+/* parte de baixo do card com infos e preco */
+.combo-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* pilulas com duracao e rota */
+.combo-infos {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.combo-infos span {
+  font-size: 0.85rem;
+  color: var(--cinza-texto);
+  background: var(--cinza-claro);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* caixa amarela do evento incluso */
+.combo-evento {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  background: linear-gradient(135deg, #fff7ed, #fef3c7);
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  font-size: 0.88rem;
+}
+
+.combo-evento > i {
+  color: var(--laranja-escuro);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.evento-nome {
+  font-weight: 700;
+  color: var(--azul-escuro);
+  font-size: 0.88rem;
+}
+
+.evento-data {
+  color: var(--cinza-texto);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* lista de itens inclusos */
+.combo-inclui {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.combo-inclui li {
+  font-size: 0.85rem;
+  color: #374151;
+  padding: 4px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.combo-inclui li i {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* preco com desconto */
+.combo-preco {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 14px;
+  margin-bottom: 14px;
+}
+
+.combo-de {
+  font-size: 0.82rem;
+  color: var(--cinza-texto);
+  text-decoration: line-through;
+}
+
+.combo-por {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--azul-claro);
+  line-height: 1.1;
+}
+
+.combo-parcelas {
+  font-size: 0.8rem;
+  color: var(--cinza-texto);
+  margin-top: 2px;
+}
+
+/* botoes de acao do combo */
+.combo-acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-ver-combo {
+  flex: 1;
+  background: var(--azul-escuro);
+  color: var(--branco);
+  border: none;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-ver-combo:hover {
+  background: var(--azul-medio);
+  transform: translateY(-1px);
+}
+
+/* botao verde do whatsapp dentro do card */
+.btn-whatsapp-combo {
+  background: var(--verde-whatsapp);
+  color: var(--branco);
+  border: none;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-whatsapp-combo:hover {
+  background: #1da851;
+  transform: translateY(-1px);
+}
+
+.combo-atracao {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+
+/* titulos das categorias de combo (luxo / economico) */
+.categoria-titulo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.categoria-titulo h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--branco);
+  margin: 0;
+}
+
+.categoria-badge {
+  padding: 4px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.categoria-badge.luxo {
+  background: rgba(162, 155, 254, 0.25);
+  color: #d4c5ff;
+  border: 1px solid rgba(162, 155, 254, 0.4);
+}
+
+.categoria-badge.economico {
+  background: rgba(85, 239, 196, 0.2);
+  color: #a8f0df;
+  border: 1px solid rgba(85, 239, 196, 0.35);
+}
+
+/* separador entre as duas categorias */
+.categoria-separador {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 56px 0 48px;
+}

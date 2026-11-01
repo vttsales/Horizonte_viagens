@@ -1,0 +1,47 @@
+/* base.css
+   variaveis globais de cor e fonte + reset geral
+   esse arquivo e importado antes de todos os outros */
+
+:root {
+  --azul-escuro: #0a1628;
+  --azul-medio: #1a3a6b;
+  --azul-claro: #2563eb;
+  --laranja: #f59e0b;
+  --laranja-escuro: #d97706;
+  --verde-whatsapp: #25d366;
+  --branco: #ffffff;
+  --cinza-claro: #f8fafc;
+  --cinza-texto: #64748b;
+  --sombra: 0 4px 24px rgba(10, 22, 40, 0.12);
+}
+
+/* zerando as margens padrao do navegador */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+  background: var(--cinza-claro);
+}
+
+/* titulos e subtitulos que se repetem em varias secoes */
+.secao-titulo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--azul-escuro);
+  margin-bottom: 8px;
+}
+
+.secao-subtitulo {
+  color: var(--cinza-texto);
+  font-size: 1rem;
+  margin-bottom: 36px;
+}
+
+.py-secao { padding: 70px 0; }
+
+/* ajustes gerais de responsividade */
+@media (max-width: 768px) {
+  .secao-titulo { font-size: 1.5rem; }
+}

@@ -1,0 +1,96 @@
+/* modais.css
+   estilos das janelas de login e cadastro */
+
+.modal-content {
+  border-radius: 16px;
+  border: none;
+  overflow: hidden;
+}
+
+/* cabecalho azul do modal */
+.modal-header-custom {
+  background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+  padding: 28px 32px 20px;
+  border: none;
+}
+
+.modal-header-custom h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  color: var(--branco);
+  font-size: 1.5rem;
+}
+
+.modal-header-custom p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.9rem;
+  margin: 0;
+}
+.modal-header-custom .btn-close {
+  filter: invert(1);
+  opacity: 0.7;
+}
+
+.modal-body {
+  padding: 24px 32px;
+}
+
+/* labels dos campos */
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--cinza-texto);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* inputs customizados */
+.form-control-custom {
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+}
+
+.form-control-custom:focus {
+  border-color: var(--azul-claro);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* botao principal dos modais */
+.btn-modal-principal {
+  background: linear-gradient(135deg, var(--azul-claro), var(--azul-medio));
+  color: var(--branco);
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-weight: 700;
+  font-size: 1rem;
+  width: 100%;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.btn-modal-principal:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  color: var(--branco);
+}
+
+/* link pra trocar entre login e cadastro */
+.link-trocar-modal {
+  color: var(--azul-claro);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+.link-trocar-modal:hover {
+  color: var(--azul-medio);
+}

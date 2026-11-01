@@ -1,0 +1,96 @@
+/* hero.css
+   estilo da secao principal com o formulario de busca */
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    var(--azul-escuro) 0%,
+    var(--azul-medio) 60%,
+    #1e4080 100%
+  );
+  padding: 80px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  color: var(--branco);
+  line-height: 1.2;
+}
+
+.hero h1 .destaque {
+  color: var(--laranja);
+}
+
+.hero p.subtitulo {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 36px;
+}
+
+/* a caixinha branca com o formulario de busca */
+.busca-box {
+  background: var(--branco);
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: var(--sombra);
+}
+
+.input-busca {
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.input-busca:focus {
+  border-color: var(--azul-claro);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.label-busca {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cinza-texto);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.btn-buscar {
+  background: var(--laranja);
+  color: var(--azul-escuro);
+  border: none;
+  border-radius: 10px;
+  padding: 13px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.btn-buscar:hover {
+  background: var(--laranja-escuro);
+  transform: translateY(-1px);
+}
+
+/* responsividade do hero no celular */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+  .busca-box {
+    padding: 20px 16px;
+  }
+}

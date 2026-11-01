@@ -1,0 +1,211 @@
+/* header.css
+   estilos da navbar no topo e do menu lateral mobile (offcanvas) */
+
+/* estilo da barra de navegacao no topo */
+.navbar-horizonte {
+  background: var(--azul-escuro);
+  padding: 14px 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  /* sem isso o hamburguer ia pra baixo do logo no celular */
+  flex-wrap: nowrap !important;
+}
+
+/* o container filho tambem precisa disso */
+.navbar-horizonte > .container {
+  flex-wrap: nowrap;
+}
+
+.navbar-brand span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--branco);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.navbar-brand span .destaque { color: var(--laranja); }
+
+.navbar-horizonte .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  font-size: 0.95rem;
+  font-weight: 400;
+  transition: color 0.2s;
+  padding: 6px 14px;
+}
+
+.navbar-horizonte .nav-link:hover { color: var(--laranja) !important; }
+
+/* texto de 'ola fulano' que aparece quando ta logado */
+.saudacao-nav {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.95rem;
+}
+
+.btn-login-nav {
+  background: transparent;
+  border: 2px solid var(--laranja);
+  color: var(--laranja) !important;
+  border-radius: 30px;
+  padding: 6px 20px !important;
+  font-weight: 700;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn-login-nav:hover {
+  background: var(--laranja);
+  color: var(--azul-escuro) !important;
+}
+
+.btn-cadastro-nav {
+  background: var(--laranja);
+  border: 2px solid var(--laranja);
+  color: var(--azul-escuro) !important;
+  border-radius: 30px;
+  padding: 6px 20px !important;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.btn-cadastro-nav:hover {
+  background: var(--laranja-escuro);
+  border-color: var(--laranja-escuro);
+}
+
+/* botao hamburguer customizado */
+.btn-hamburguer {
+  background: none;
+  border: none;
+  color: var(--branco);
+  font-size: 1.6rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  line-height: 1;
+  margin-left: auto;
+}
+
+.btn-hamburguer:hover { color: var(--laranja); }
+
+/* offcanvas — menu lateral que abre no mobile */
+.offcanvas-menu {
+  background: var(--azul-escuro);
+  width: 280px !important;
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 20px;
+}
+
+.offcanvas-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--branco);
+}
+
+.btn-fechar-menu {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.2s;
+}
+
+.btn-fechar-menu:hover { color: var(--branco); }
+
+/* links dentro do menu mobile */
+.menu-links .nav-link {
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 14px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: color 0.2s;
+}
+
+.menu-links .nav-link:hover { color: var(--laranja); }
+.menu-links .nav-link i { color: var(--laranja); }
+
+/* separador entre links e botoes de login */
+.menu-divisor {
+  border-color: rgba(255,255,255,0.1);
+  margin: 8px 0 20px;
+}
+
+/* area do usuario logado no mobile */
+.menu-usuario-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-usuario-nome {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btn-sair-mobile {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-sair-mobile:hover {
+  background: rgba(255,255,255,0.14);
+  color: var(--branco);
+}
+
+/* botoes de login/cadastro no mobile */
+.menu-botoes-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-entrar-mobile {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  border-radius: 10px;
+  border: 2px solid var(--laranja);
+  color: var(--laranja);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-entrar-mobile:hover {
+  background: var(--laranja);
+  color: var(--azul-escuro);
+}
+
+.btn-cadastrar-mobile {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  border-radius: 10px;
+  background: var(--laranja);
+  color: var(--azul-escuro);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-cadastrar-mobile:hover { background: var(--laranja-escuro); }

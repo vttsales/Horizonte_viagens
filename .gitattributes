@@ -1,0 +1,8 @@
+# ALTERAÇÃO PIM: preserva arquivos binários e normaliza código entre Windows e Linux.
+* text=auto
+*.pdf binary
+*.docx binary
+*.jpg binary
+*.png binary
+*.ico binary
+*.woff2 binary

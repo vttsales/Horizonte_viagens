@@ -1,0 +1,4 @@
+@model List<HorizonteViagens.Modelos.Dtos.ComboDto>
+@* ALTERAÇÃO PIM: catálogo filtrável com totais atualizados por grupo. *@
+@{ViewData["Title"]="Pacotes de viagem";}
+<section class="container section"><span class="eyebrow">ENCONTRE SEU HORIZONTE</span><h1>Pacotes de viagem</h1><partial name="_Busca"/><div class="results-bar"><p>@Model.Count experiências encontradas</p><a href="/Combos?destino=@ViewBag.Destino&categoria=@ViewBag.Categoria&viajantes=@ViewBag.Viajantes&ordem=preco">Ordenar pelo menor total</a></div><p class="price-note">Valores para adultos. Até duas pessoas por quarto; grupos ímpares incluem um quarto de uso individual. Datas, tarifas e serviços sujeitos à confirmação.</p><div class="trip-grid">@foreach(var c in Model){<partial name="_Card" model="c"/>}@if(Model.Count==0){<div class="empty-panel"><h2>Nenhum pacote encontrado.</h2><a href="/Combos">Limpar busca</a></div>}</div></section>

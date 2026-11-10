@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- O ambiente possui .NET 10 e não .NET 9; permite executar no runtime posterior. -->
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- ALTERAÇÃO PIM: testes HTTP reais com banco relacional isolado, sem exigir SQL Server no PC de frontend. -->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.22" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HorizonteViagens.Web\HorizonteViagens.Web.csproj" />
+    <ProjectReference Include="..\HorizonteViagens.Api\HorizonteViagens.Api.csproj" />
+    <ProjectReference Include="..\HorizonteViagens.Negocio\HorizonteViagens.Negocio.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+@* ALTERAÇÃO PIM: título acessível da área da conta. *@
+@{ViewData["Title"]="Minhas viagens";}
+@model List<HorizonteViagens.Modelos.Compra>
+@* ALTERAÇÃO PIM: histórico real; cliente vê apenas suas reservas, administrador acompanha todas. *@
+<section class="container section"><span class="eyebrow">SUA CONTA HORIZONTE</span><h1>@(User.IsInRole("Administrador")?"Gestão de reservas":"Minhas viagens")</h1>@if(Model.Count==0){<div class="empty-panel"><h2>Sua próxima história começa aqui.</h2><p>Ainda não há reservas.</p><a href="/Combos" class="btn btn-gold">Explorar destinos</a></div>}<div class="reservation-grid">@foreach(var c in Model){<article class="reservation-card"><small>RESERVA HV-@c.Id</small><span class="status">@c.Status</span><h2>@c.NomePacote</h2><p>@c.Destino · @(c.Partida?.ToString("dd/MM/yyyy")??"Data a confirmar")</p><p>@c.Viajantes adulto(s) · @c.Quartos quarto(s) · @c.Noites noites</p>@if(User.IsInRole("Administrador")){<p>Cliente: @c.Cliente.Nome</p>}<strong>@c.Valor.ToString("C")</strong><a asp-action="Detalhes" asp-route-id="@c.Id" class="btn btn-dark">Ver reserva →</a></article>}</div></section>

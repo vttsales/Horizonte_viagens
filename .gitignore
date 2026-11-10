@@ -1,0 +1,19 @@
+# ALTERAÇÃO PIM: evita publicar artefatos locais e credenciais.
+**/bin/
+**/obj/
+**/.vs/
+**/.dart_tool/
+**/build/
+**/.flutter-plugins-dependencies
+**/local.properties
+**/key.properties
+**/*.jks
+**/*.keystore
+.env
+.env.*
+**/appsettings.Local.json
+
+# ALTERAÇÃO PIM Pages: saída regenerável e dependências locais.
+.pages-build/
+node_modules/
+*.log

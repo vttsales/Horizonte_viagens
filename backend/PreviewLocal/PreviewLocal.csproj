@@ -1,0 +1,2 @@
+<!-- ALTERAÇÃO PIM: servidor de verificação visual isolado; nunca usa SQL ou cobrança. -->
+<Project Sdk="Microsoft.NET.Sdk.Web"><PropertyGroup><TargetFramework>net9.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup><ItemGroup><ProjectReference Include="../HorizonteViagens.Testes/HorizonteViagens.Testes.csproj" /></ItemGroup></Project>

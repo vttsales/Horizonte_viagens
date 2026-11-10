@@ -1,0 +1,4 @@
+@model List<HorizonteViagens.Modelos.Dtos.ComboDto>
+@* ALTERAÇÃO PIM: painel de catálogo exclusivo do administrador. *@
+@{ViewData["Title"]="Gerenciar combos";}
+<section class="container section"><div class="section-title"><h1>Gerenciar combos</h1><a class="btn btn-gold" asp-action="Criar">+ Novo combo</a></div><div class="table-responsive"><table class="table"><thead><tr><th>Destino / evento</th><th>Vagas</th><th>Partida</th><th>Publicado</th><th>Ações</th></tr></thead><tbody>@foreach(var c in Model){<tr><td><strong>@c.Nome</strong><br>@c.Evento</td><td>@c.Vagas</td><td>@(c.Partida?.ToString("dd/MM/yyyy")??"Sob consulta")</td><td>@(c.Publicado?"Sim":"Não")</td><td><a asp-action="Editar" asp-route-id="@c.Id">Editar</a> · <a asp-action="Excluir" asp-route-id="@c.Id">Excluir</a></td></tr>}</tbody></table></div></section>

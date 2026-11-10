@@ -1,0 +1,55 @@
+﻿@model HorizonteViagens.Modelos.Dtos.ClienteSalvarDto
+@* Partial view: os campos do cliente, usados tanto em Criar quanto em Editar.
+   A tela de Editar preenche ViewData["Id"]; a de Criar não. É assim que a
+   partial sabe em qual das duas está. *@
+@{
+    var editando = ViewData["Id"] is not null;
+}
+
+<div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+<div class="mb-3">
+    <label asp-for="Nome" class="form-label"></label>
+    <input asp-for="Nome" class="form-control" autocomplete="name" />
+    <span asp-validation-for="Nome" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" class="form-control" autocomplete="email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Cpf" class="form-label"></label>
+    <input asp-for="Cpf" class="form-control" placeholder="000.000.000-00" inputmode="numeric" />
+    <span asp-validation-for="Cpf" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Celular" class="form-label"></label>
+    <input asp-for="Celular" class="form-control" placeholder="(16) 9.8899-4455" inputmode="tel" autocomplete="tel" />
+    <span asp-validation-for="Celular" class="text-danger"></span>
+</div>
+
+@if (!editando)
+{
+    @* Só no cadastro. Na edição, o administrador corrige os dados,
+       mas não mexe na senha do cliente. *@
+    <div class="mb-3">
+        <label asp-for="Senha" class="form-label"></label>
+        <input asp-for="Senha" class="form-control" autocomplete="new-password" />
+        <div class="form-text">
+            Mínimo de 8 caracteres, com letra maiúscula, letra minúscula, número e caractere especial.
+        </div>
+        <span asp-validation-for="Senha" class="text-danger"></span>
+    </div>
+}
+else
+{
+    @* Ativar/desativar é decisão do administrador, não do viajante. *@
+    <div class="form-check mb-3">
+        <input asp-for="Ativo" class="form-check-input" />
+        <label asp-for="Ativo" class="form-check-label"></label>
+    </div>
+}

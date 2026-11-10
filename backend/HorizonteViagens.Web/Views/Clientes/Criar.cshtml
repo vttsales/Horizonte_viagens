@@ -1,0 +1,34 @@
+@* ALTERAÇÃO PIM: margem e largura consistentes nas telas de cadastro e gestão de clientes. *@
+<section class="container section narrow">
+@model HorizonteViagens.Modelos.Dtos.ClienteSalvarDto
+@{
+    // A mesma tela serve ao viajante (se cadastrando) e ao administrador
+    // (cadastrando alguém pelo balcão). Só o título e o "Voltar" mudam.
+    var admin = User.IsInRole("Administrador");
+    ViewData["Title"] = admin ? "Novo cliente" : "Cadastre-se";
+}
+
+<h1 class="h3 mb-3">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-12 col-md-8 col-lg-6">
+        <form asp-action="Criar" method="post">
+            <partial name="_Formulario" model="Model" />
+            <button type="submit" class="btn btn-primary">@(admin ? "Salvar" : "Criar meu cadastro")</button>
+            @if (admin)
+            {
+                <a asp-action="Index" class="btn btn-link">Voltar</a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Index" class="btn btn-link">Voltar</a>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+</section>

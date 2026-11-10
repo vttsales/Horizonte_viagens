@@ -1,0 +1,33 @@
+<!-- ALTERAÇÃO PIM: Referências e versões de dependências .NET fixadas para a integração/testes. -->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\HorizonteViagens.Modelos\HorizonteViagens.Modelos.csproj" />
+    <ProjectReference Include="..\HorizonteViagens.Negocio\HorizonteViagens.Negocio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.22" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.22">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.22">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Scalar.AspNetCore" Version="2.17.13" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <!-- Roda no .NET 9; se a máquina só tiver o .NET 10, usa o 10 sem precisar mudar nada. -->
+    <RollForward>Major</RollForward>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Identifica a pasta do User Secrets desta Api (fica fora do projeto, nunca vai para o Git). -->
+    <UserSecretsId>horizonteviagens-api-88b993b7-a6cc-45c6-8fd6-9b0bb8bb789d</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

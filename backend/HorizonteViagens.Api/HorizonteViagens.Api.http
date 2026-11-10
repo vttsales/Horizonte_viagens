@@ -1,0 +1,141 @@
+# Arquivo de teste da API (alternativa à tela do Scalar, em /scalar).
+# Com a Api rodando, clique em "Enviar solicitação" (Visual Studio) ou
+# "Send Request" (VS Code com a extensão REST Client) em cima de cada chamada.
+# A resposta abre ao lado, com o código HTTP e o JSON devolvido.
+# Rode na ordem, começando pelo LOGIN: as outras chamadas usam o token dele.
+
+@HorizonteViagens.Api_HostAddress = https://localhost:7077
+
+### 1) Login do administrador (espera 200 com o token)
+# @name login
+POST {{HorizonteViagens.Api_HostAddress}}/api/autenticacao/login
+Content-Type: application/json
+
+{
+  "email": "admin@horizonteviagens.com",
+  "senha": "Horizonte@2026"
+}
+
+### Login com senha errada (espera 401)
+POST {{HorizonteViagens.Api_HostAddress}}/api/autenticacao/login
+Content-Type: application/json
+
+{
+  "email": "admin@horizonteviagens.com",
+  "senha": "errada"
+}
+
+### Cadastrar um cliente SEM token (espera 201: o cadastro é aberto)
+POST {{HorizonteViagens.Api_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nome": "Ana Souza",
+  "email": "ana@exemplo.com",
+  "cpf": "529.982.247-25",
+  "celular": "(16) 9.8899-4455",
+  "senha": "Viagem@2026"
+}
+
+### Cadastrar com senha fraca (espera 400, regra de negócio)
+POST {{HorizonteViagens.Api_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nome": "Outra Pessoa",
+  "email": "outra@exemplo.com",
+  "cpf": "111.222.333-44",
+  "celular": "11987654321",
+  "senha": "123"
+}
+
+### Listar SEM token (espera 401: só o administrador vê os clientes)
+GET {{HorizonteViagens.Api_HostAddress}}/api/clientes
+Accept: application/json
+
+### Listar COM token (espera 200)
+GET {{HorizonteViagens.Api_HostAddress}}/api/clientes
+Accept: application/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Obter um cliente pelo id (espera 200; troque o 1 por um id que exista)
+GET {{HorizonteViagens.Api_HostAddress}}/api/clientes/1
+Accept: application/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Alterar o cliente 1 (espera 204; "senha" vazia = mantém a atual)
+PUT {{HorizonteViagens.Api_HostAddress}}/api/clientes/1
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+{
+  "nome": "Ana Souza Silva",
+  "email": "ana@exemplo.com",
+  "cpf": "529.982.247-25",
+  "celular": "(16) 9.8899-0000",
+  "senha": "",
+  "ativo": true
+}
+
+### Buscar por nome pela stored procedure (espera 200)
+GET {{HorizonteViagens.Api_HostAddress}}/api/clientes/buscar?nome=silva
+Accept: application/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Excluir o cliente 1 (espera 204; chamando de novo, 404)
+DELETE {{HorizonteViagens.Api_HostAddress}}/api/clientes/1
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Documento OpenAPI gerado (espera 200, um JSON com todos os endpoints)
+GET {{HorizonteViagens.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+### Vitrine pública de combos (espera 200; requer migration CatalogoCombos aplicada)
+GET {{HorizonteViagens.Api_HostAddress}}/api/combos?destino=Recife
+Accept: application/json
+
+### Criar combo (Administrador; guarde id retornado para a compra)
+# @name criarCombo
+POST {{HorizonteViagens.Api_HostAddress}}/api/combos
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+{
+  "nome": "Fim de semana em Recife",
+  "destino": "Recife",
+  "vagas": 2,
+  "categoria": "Econômico",
+  "valor": 1299.90
+}
+
+### Login de cliente (use e-mail/senha cadastrados)
+# @name loginCliente
+POST {{HorizonteViagens.Api_HostAddress}}/api/autenticacao/login-cliente
+Content-Type: application/json
+
+{
+  "email": "ana@exemplo.com",
+  "senha": "Viagem@2026"
+}
+
+### Comprar combo (Cliente; esperado 200; sem vaga retorna 400 com a mensagem em "erro")
+POST {{HorizonteViagens.Api_HostAddress}}/api/compras
+Content-Type: application/json
+Authorization: Bearer {{loginCliente.response.body.$.token}}
+
+{
+  "comboId": {{criarCombo.response.body.$.id}}
+}
+
+### Listar todos os combos, inclusive sem vaga (Administrador; espera 200)
+GET {{HorizonteViagens.Api_HostAddress}}/api/combos/todos
+Accept: application/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Health check (espera 200 com o texto Healthy)
+GET {{HorizonteViagens.Api_HostAddress}}/health
+
+### Monitorar compras (Administrador)
+GET {{HorizonteViagens.Api_HostAddress}}/api/compras
+Accept: application/json
+Authorization: Bearer {{login.response.body.$.token}}

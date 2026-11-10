@@ -56,9 +56,11 @@ A sessão do site fica em memória e termina ao recarregar a página. Autorizaç
 
 ## Verificação
 
-- 10 testes JavaScript aprovados.
-- 23 testes .NET aprovados, incluindo autorização e edição concorrente de combos pela API.
+- 14 testes JavaScript aprovados.
+- 34 testes .NET aprovados, incluindo autorização e edição concorrente de combos pela API.
 - Flutter preservado da entrega anterior (3 testes aprovados e Web compilado naquela etapa).
 - SQL Server e pagamento externo ainda dependem da homologação da equipe. Testes locais usam SQLite isolado.
 
 Leia [o resumo desta atualização](documentacao/ATUALIZACAO-GITHUB-PAGES.md), [a execução do backend](documentacao/COMO-EXECUTAR.md) e [as fontes dos preços](documentacao/PRECOS-E-FONTES.md).
+
+Para habilitar cadastro/login no site publicado, siga [Ligar a API](documentacao/LIGAR-API.md). Enquanto a API não estiver configurada, os formulários informam a indisponibilidade antes do envio.

@@ -32,3 +32,12 @@ Documentação de publicação: https://docs.github.com/en/pages/getting-started
 ## Verificação no navegador
 
 Fluxos executados contra a API C# com banco descartável: login cliente, consulta de orçamento, reserva de dois adultos por R$ 4.600, cancelamento com confirmação, login admin e edição de combo com gravação. Conferida busca por Ubatuba e troca para três adultos (R$ 8.550); imagens sem falhas e sem largura excedente na tela verificada. A URL local da API foi removida de config.js antes do empacotamento. Nenhum pagamento externo foi iniciado.
+
+## Correção do cadastro — 10/11/2026
+
+- domain.js: validação de CPF (formato, repetição e verificadores), senha, celular, CEP e confirmação de senha.
+- app.js: mensagens junto aos campos, validade nativa antes do envio, regras de senha visíveis e confirmação; cadastro/login avisam indisponibilidade e não habilitam envio enquanto config.js não aponta para uma API.
+- styles.css: estilos para erros e indicadores textuais de regras cumpridas.
+- ClienteNegocio.cs: rejeição de formato de CPF com letras/dígitos Unicode, máximo de 128 caracteres de senha e recusa de espaços; mantém o hash e os verificadores já existentes.
+- Testes: 14 JavaScript e 34 .NET aprovados. No navegador, CPF 12345 foi marcado inválido e exibiu mensagem; senha curta e confirmação diferente foram sinalizadas.
+- LIGAR-API.md: roteiro para iniciar a API no PC do backend, validar SQL e obter URL HTTPS de teste; nenhuma API pública foi configurada, pois a equipe informou que ela ainda não está rodando.

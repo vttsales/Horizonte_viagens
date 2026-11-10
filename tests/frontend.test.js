@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {budget,escapeHtml,apiBase,safeUrl} from '../domain.js';
+import {budget,escapeHtml,apiBase,safeUrl,cpfError,passwordRules,profileErrors} from '../domain.js';
 import {Api} from '../api.js';
 const c={valor:300,valorExperiencias:350,diariaQuarto:550,noites:6};
 test('Preço inclui o quarto extra para grupo ímpar',()=>{for(const [n,total] of [[1,3950],[2,4600],[3,8550],[6,13800]])assert.equal(budget(c,n).total,total);});
@@ -18,3 +18,9 @@ test('Login usa endpoint certo e autentica a próxima chamada sem persistir toke
 test('Sem API não inventa login ou reserva',async()=>{const api=new Api('','https:',()=>{throw Error('Não deveria chamar');});await assert.rejects(api.login('a','b',false),/indisponível/);});
 test('Erros do contrato são legíveis',async()=>{const api=new Api('https://api.test','https:',async()=>new Response(JSON.stringify({erro:'Sem vagas'}),{status:400}));await assert.rejects(api.call('/api/portal/reservas',{method:'POST',body:{}}),/Sem vagas/);});
 test('Catálogo editorial nunca confirma estoque ou saída',async()=>{const data=JSON.parse(await readFile(new URL('../catalogo.json',import.meta.url)));assert.equal(data.length,6);for(const c of data){assert.equal(c.vagas,0);assert.equal(c.precoConfirmado,false);assert.equal(c.partida,null);}});
+
+// ALTERAÇÃO PIM: regressões para CPF curto, dígitos falsos e senhas incompatíveis com o servidor.
+test('CPF rejeita cinco dígitos, repetição, letras e verificador errado',()=>{for(const cpf of ['12345','11111111111','52998224724','abc52998224725','５２９９８２２４７２５'])assert.notEqual(cpfError(cpf),'');});
+test('CPF aceita formato com ou sem pontuação, inclusive zero inicial',()=>{for(const cpf of ['52998224725','529.982.247-25','01234567890'])assert.equal(cpfError(cpf),'');});
+test('Senha exige todas as regras e não aceita espaço como símbolo',()=>{for(const pass of ['Ab1!','abcdefgh1!','ABCDEFGH1!','Abcdefgh!','Abcdefgh1','Abcdefg1 ','Abcdefg1! ','Ab1!'+ 'x'.repeat(125)])assert.ok(passwordRules(pass).some(r=>!r.valid));assert.ok(passwordRules('SenhaForte1!').every(r=>r.valid));});
+test('Confirmação de senha e campos complementares são conferidos',()=>{const d={cpf:'52998224725',celular:'(11) 99999-9999',cep:'01001-000',senha:'SenhaForte1!',confirmarSenha:'OutraSenha1!'};assert.ok(profileErrors(d,true).confirmarSenha);d.confirmarSenha=d.senha;assert.ok(Object.values(profileErrors(d,true)).every(e=>!e));assert.ok(profileErrors({...d,celular:'12345'}).celular);assert.ok(profileErrors({...d,cep:'123'}).cep);});

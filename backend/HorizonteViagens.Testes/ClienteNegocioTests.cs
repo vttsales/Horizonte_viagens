@@ -29,6 +29,23 @@ public class ClienteNegocioTests
         Assert.True(SenhaHasher.Conferir("SenhaForte1!", repo.Salvo.SenhaHash));
     }
 
+    // ALTERAÇÃO PIM: nenhuma gravação pode ocorrer ao enviar formato inválido diretamente à API/negócio.
+    [Theory]
+    [InlineData("12345")][InlineData("11111111111")][InlineData("abc52998224725")][InlineData("５２９９８２２４７２５")]
+    public void Cadastrar_RecusaFormatoCpfSemGravar(string cpf)
+    {
+        var repo = new RepositorioClienteFalso();
+        Assert.Throws<RegraDeNegocioException>(() => new ClienteNegocio(repo).Cadastrar(new Cliente {Nome="Teste",Email="teste@example.com",Cpf=cpf,Celular="11999999999"},"SenhaForte1!"));
+        Assert.Null(repo.Salvo);
+    }
+    [Theory]
+    [InlineData("Ab1!")][InlineData("abcdefgh1!")][InlineData("ABCDEFGH1!")][InlineData("Abcdefgh!")][InlineData("Abcdefgh1")][InlineData("Abcdefg1 ")][InlineData("Abcdefg1! ")]
+    public void Cadastrar_RecusaSenhaInvalidaSemGravar(string senha)
+    {
+        var repo = new RepositorioClienteFalso();
+        Assert.Throws<RegraDeNegocioException>(() => new ClienteNegocio(repo).Cadastrar(new Cliente {Nome="Teste",Email="teste@example.com",Cpf="52998224725",Celular="11999999999"},senha));
+        Assert.Null(repo.Salvo);
+    }
     private sealed class RepositorioClienteFalso : IClienteRepositorio
     {
         public Cliente? Salvo { get; private set; }

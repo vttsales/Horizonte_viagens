@@ -95,6 +95,10 @@ public class ClienteNegocio
     {
         cliente.Nome = cliente.Nome.Trim();
         cliente.Email = cliente.Email.Trim().ToLowerInvariant();
+        // ALTERAÇÃO PIM: recusa letras, dígitos Unicode e formatos incompletos antes de normalizar.
+        cliente.Cpf = (cliente.Cpf ?? "").Trim();
+        if (!Regex.IsMatch(cliente.Cpf, @"^(?:[0-9]{11}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2})$"))
+            throw new RegraDeNegocioException("Informe os 11 dígitos do CPF, com ou sem pontos e traço.");
         // Guarda só os dígitos: "123.456.789-09" vira "12345678909".
         cliente.Cpf = new string(cliente.Cpf.Where(char.IsDigit).ToArray());
         // Mesma ideia para o celular: "(16) 9.8899-4455" vira "16988994455".
@@ -145,6 +149,11 @@ public class ClienteNegocio
         if (senha.Length < 8)
             throw new RegraDeNegocioException("A senha precisa ter no mínimo 8 caracteres.");
 
+        // ALTERAÇÃO PIM: mesmo limite e tratamento de espaços do formulário HTML.
+        if (senha.Length > 128)
+            throw new RegraDeNegocioException("A senha pode ter no máximo 128 caracteres.");
+        if (Regex.IsMatch(senha, @"\s"))
+            throw new RegraDeNegocioException("A senha não pode conter espaços.");
         if (!Regex.IsMatch(senha, @"[A-Z]"))
             throw new RegraDeNegocioException("A senha precisa ter uma letra maiúscula.");
 
@@ -154,7 +163,7 @@ public class ClienteNegocio
         if (!Regex.IsMatch(senha, @"[0-9]"))
             throw new RegraDeNegocioException("A senha precisa ter um número.");
 
-        if (!Regex.IsMatch(senha, @"[\W_]"))
+        if (!Regex.IsMatch(senha, @"[^\p{L}\p{N}\s]"))
             throw new RegraDeNegocioException("A senha precisa ter um caractere especial.");
     }
 }
